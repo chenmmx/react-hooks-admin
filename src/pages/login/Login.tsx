@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, notification } from 'antd';
 import './styles.less';
@@ -19,18 +19,25 @@ const Login: FC = () => {
   }
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [form] = Form.useForm();
   const history = useHistory();
+  useEffect(() => {
+    const userInfo: any = JSON.parse(window.localStorage.getItem('user_info') || '{}') || {};
+    if (userInfo.remember) {
+      form.setFieldsValue(userInfo);
+    } else {
+      form.setFieldsValue({
+        remember: false,
+      });
+    }
+    window.localStorage.setItem('is_login', 'false');
+  }, [form]);
 
   const onFinish = (values: FormFields) => {
     setLoading(true);
-    const { username, password, remember } = values;
-    const isRemembered = window.localStorage.getItem('is_rembered') === 'true' || false;
-    if (remember && !isRemembered) {
-      window.localStorage.setItem('is_rembered', 'true');
-    }
-    if (!remember && isRemembered) {
-      window.localStorage.setItem('is_rembered', 'false');
-    }
+    window.localStorage.setItem('user_info', JSON.stringify(values));
+    window.localStorage.setItem('is_login', 'true');
+
     setTimeout(() => {
       setLoading(false);
       notification.success({
@@ -49,6 +56,7 @@ const Login: FC = () => {
           <div className="login-form">
             <h2 className="login-form-title">Welcome Back!</h2>
             <Form
+              form={form}
               {...layout}
               name="basic"
               layout="vertical"

@@ -3,7 +3,7 @@ import { Switch } from 'react-router-dom';
 import { SubRoute } from '../router/subRoute';
 import { RouteConfigProps } from '../router/routerConfig';
 import { useHistory, useLocation } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Dropdown, Avatar } from 'antd';
 import './styles.scss';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -41,6 +41,13 @@ const AppLayout: FC = (props: any) => {
       ],
     },
   ];
+  const menu = (
+    <Menu>
+      <Menu.Item key="0">
+        <a href="/login">退出登陆</a>
+      </Menu.Item>
+    </Menu>
+  );
   const onMenuSelect = (item: any): any => {
     history.push(item.key);
   };
@@ -72,7 +79,23 @@ const AppLayout: FC = (props: any) => {
         </Menu>
       </Sider>
       <Layout className="site-layout" style={{ marginLeft: 200 }}>
-        <Header className="site-layout-background" style={{ padding: 0 }} />
+        <Header
+          className="site-layout-background"
+          style={{ padding: '0 16px', textAlign: 'right' }}
+        >
+          <div className="user-info">
+            <span className="user-info--text" style={{ marginRight: '8px' }}>
+              chenmmx
+            </span>
+            <Dropdown overlay={menu}>
+              <Avatar
+                size="large"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz1kzITo565azzuazVupYhxNxPhB7jzO2MAQ&usqp=CAU"
+                style={{ cursor: 'pointer' }}
+              />
+            </Dropdown>
+          </div>
+        </Header>
         <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
           <div
             className="site-layout-background"

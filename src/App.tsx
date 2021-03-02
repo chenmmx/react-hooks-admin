@@ -23,12 +23,14 @@ notification.config({
   duration: 2,
 });
 function App() {
+  const isLogin = window.localStorage.getItem('is_login') === 'true' || false;
+
   return (
     // <Provider store={store}>
     <ConfigProvider locale={zhCN}>
       <BrowserRouter>
         <MyRouter />
-        <Redirect from={'*'} exact={true} to={'/login'} />
+        {isLogin ? null : <Redirect from={'*'} exact={true} to={'/login'} />}
       </BrowserRouter>
     </ConfigProvider>
     // </Provider>
