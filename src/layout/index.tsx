@@ -3,8 +3,15 @@ import { Switch } from 'react-router-dom';
 import { SubRoute } from '../router/subRoute';
 import { RouteConfigProps } from '../router/routerConfig';
 import { useHistory, useLocation } from 'react-router-dom';
-import { Layout, Menu, Dropdown, Avatar } from 'antd';
-import './styles.scss';
+import { Layout, Menu, Dropdown, Avatar, Tooltip } from 'antd';
+import {
+  UserOutlined,
+  SettingOutlined,
+  LogoutOutlined,
+  QuestionCircleOutlined,
+} from '@ant-design/icons';
+import Notification from './components/notification';
+import './styles.less';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -40,11 +47,44 @@ const AppLayout: FC = (props: any) => {
         },
       ],
     },
+    {
+      id: '4',
+      name: '个人页',
+      key: '/personal',
+      children: [
+        {
+          id: '5',
+          name: '个人中心',
+          key: '/personal/center',
+        },
+        {
+          id: '6',
+          name: '个人设置',
+          key: '/personal/settings',
+        },
+      ],
+    },
   ];
   const menu = (
     <Menu>
       <Menu.Item key="0">
-        <a href="/login">退出登陆</a>
+        <a href="https://www.antgroup.com">
+          <UserOutlined />
+          个人中心
+        </a>
+      </Menu.Item>
+      <Menu.Item key="1">
+        <a href="https://www.antgroup.com">
+          <SettingOutlined />
+          个人设置
+        </a>
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key="2">
+        <a href="/login">
+          <LogoutOutlined />
+          退出登陆
+        </a>
       </Menu.Item>
     </Menu>
   );
@@ -79,27 +119,36 @@ const AppLayout: FC = (props: any) => {
         </Menu>
       </Sider>
       <Layout className="site-layout" style={{ marginLeft: 200 }}>
-        <Header
-          className="site-layout-background"
-          style={{ padding: '0 16px', textAlign: 'right' }}
-        >
-          <div className="user-info">
-            <span className="user-info--text" style={{ marginRight: '8px' }}>
-              chenmmx
-            </span>
+        <Header className="site-layout-background site-layout-header">
+          <div style={{ flex: '1 1 0%' }} />
+          <div className="site-layout-header-right">
+            <Tooltip placement="bottom" title="使用文档">
+              <a
+                href="https://www.google.com"
+                target="_blank"
+                rel="noreferrer"
+                className="site-layout-header-right-action use-instruction"
+                style={{ color: 'inherit' }}
+              >
+                <QuestionCircleOutlined />
+              </a>
+            </Tooltip>
+            <Notification />
             <Dropdown overlay={menu}>
-              <Avatar
-                size="large"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz1kzITo565azzuazVupYhxNxPhB7jzO2MAQ&usqp=CAU"
-                style={{ cursor: 'pointer' }}
-              />
+              <span className="site-layout-header-right-action user-info">
+                <Avatar
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz1kzITo565azzuazVupYhxNxPhB7jzO2MAQ&usqp=CAU"
+                  style={{ cursor: 'pointer', marginRight: '8px' }}
+                />
+                <span className="user-info--text">chenmmx</span>
+              </span>
             </Dropdown>
           </div>
         </Header>
         <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
           <div
             className="site-layout-background"
-            style={{ padding: 24, textAlign: 'center', minHeight: 'calc(100vh - 156px)' }}
+            style={{ padding: 24, textAlign: 'center', minHeight: 'calc(100vh - 142px)' }}
           >
             <Switch>
               {props.routes.map((item: RouteConfigProps) => {

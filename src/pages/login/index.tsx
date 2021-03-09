@@ -36,10 +36,12 @@ const Login: FC = () => {
   const onFinish = (values: FormFields) => {
     setLoading(true);
     window.localStorage.setItem('user_info', JSON.stringify(values));
-    window.localStorage.setItem('is_login', 'true');
 
     setTimeout(() => {
       setLoading(false);
+      const date: string = new Date().getTime() + 6 * 3600 * 1000 + '';
+      window.localStorage.setItem('is_login', 'true');
+      window.localStorage.setItem('tokenTime', date);
       notification.success({
         message: '提示',
         description: '登陆成功！',

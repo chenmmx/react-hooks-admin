@@ -1,0 +1,41 @@
+.app-layout {
+  .logo {
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .site-layout {
+    &-background {
+      background: #fff;
+    }
+    &-header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      height: 48px;
+      line-height: 48px;
+      width: 100%;
+      z-index: 19;
+      background: #fff;
+      &-right {
+        display: flex;
+        float: right;
+        height: 48px;
+        margin-left: auto;
+        overflow: hidden;
+        &-action {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          padding: 0 12px;
+          cursor: pointer;
+          transition: all .3s;
+          &:hover {
+            background: rgba(0,0,0,.025)
+          }
+        }
+      }
+    }
+  }
+}

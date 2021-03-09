@@ -1,0 +1,34 @@
+.user-notice {
+  &-icon {
+    font-size: 1rem;
+    padding: 4px;
+  }
+}
+.layout-header-notice {
+  width: 330px;
+  > * {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 6px 16px -8px rgb(0 0 0 / 8%), 0 9px 28px 0 rgb(0 0 0 / 5%),
+      0 12px 48px 16px rgb(0 0 0 / 3%);
+  }
+  .user-notice-list-bottomBar {
+    height: 46px;
+    color: rgba(0,0,0,.85);
+    line-height: 46px;
+    text-align: center;
+    border-top: 1px solid #f0f0f0;
+    border-radius: 0 0 2px 2px;
+    transition: all .3s;
+    > div {
+      display: inline-block;
+      width: 50%;
+      cursor: pointer;
+      transition: all .3s;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  }
+}

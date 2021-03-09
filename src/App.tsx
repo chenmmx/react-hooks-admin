@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import { Provider } from 'react-redux';
 import zhCN from 'antd/es/locale-provider/zh_CN';
 import { BrowserRouter, Redirect } from 'react-router-dom';
 import { MyRouter } from './router';
 import { ConfigProvider, message, notification } from 'antd';
+import { tokenExpressInTime } from '../src/utils/methods';
 // import storeConfig from './store';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
@@ -23,14 +24,21 @@ notification.config({
   duration: 2,
 });
 function App() {
-  const isLogin = window.localStorage.getItem('is_login') === 'true' || false;
+  const isLogined: boolean = window.localStorage.getItem('is_login') === 'true' || false;
+  useEffect(() => {
+    if (tokenExpressInTime()) {
+      message.error('登陆过期，请重新登陆!');
+    }
+  }, []);
 
   return (
     // <Provider store={store}>
     <ConfigProvider locale={zhCN}>
       <BrowserRouter>
         <MyRouter />
-        {isLogin ? null : <Redirect from={'*'} exact={true} to={'/login'} />}
+        {isLogined && !tokenExpressInTime() ? null : (
+          <Redirect from={'*'} exact={true} to={'/login'} />
+        )}
       </BrowserRouter>
     </ConfigProvider>
     // </Provider>

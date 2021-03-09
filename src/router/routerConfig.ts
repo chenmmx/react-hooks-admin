@@ -10,9 +10,9 @@ export interface RouteConfigProps {
   routes?: RouteConfigProps[];
 }
 
-const AppLayout = loadable(() => import('../layout/layout'));
-const Login = loadable(() => import('../pages/login/Login'));
-const Home = loadable(() => import('../pages/home/Home'));
+const AppLayout = loadable(() => import('../layout'));
+const Login = loadable(() => import('../pages/login'));
+const Home = loadable(() => import('../pages/home'));
 
 export const routeConfig: RouteConfigProps[] = [
   {
