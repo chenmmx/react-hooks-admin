@@ -37,15 +37,8 @@ const AppLayout: FC = (props: any) => {
     },
     {
       id: '2',
-      name: '人员管理',
-      key: '/person',
-      children: [
-        {
-          id: '3',
-          name: '信息管理',
-          key: '/person',
-        },
-      ],
+      name: '聊天室',
+      key: '/chat',
     },
     {
       id: '4',

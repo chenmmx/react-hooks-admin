@@ -13,6 +13,7 @@ export interface RouteConfigProps {
 const AppLayout = loadable(() => import('../layout'));
 const Login = loadable(() => import('../pages/login'));
 const Home = loadable(() => import('../pages/home'));
+const Chat = loadable(() => import('../pages/chat'));
 
 export const routeConfig: RouteConfigProps[] = [
   {
@@ -35,6 +36,13 @@ export const routeConfig: RouteConfigProps[] = [
         component: Home,
         id: 1,
         name: 'Home',
+      },
+      {
+        path: '/chat',
+        exact: false,
+        component: Chat,
+        id: 2,
+        name: 'Chat',
       },
     ],
   },

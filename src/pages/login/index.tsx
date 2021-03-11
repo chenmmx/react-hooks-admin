@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Form, Input, Button, Checkbox, notification } from 'antd';
+import { Form, Input, Button, Checkbox, notification, Row, Col, Divider } from 'antd';
 import './styles.less';
 
 const layout = {
@@ -8,7 +8,7 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
+  wrapperCol: { span: 16 },
 };
 
 const Login: FC = () => {
@@ -51,47 +51,54 @@ const Login: FC = () => {
   };
 
   return (
-    <div className="container">
-      <div className="container-main">
-        <div className="main-left" />
-        <div className="main-right">
-          <div className="login-form">
-            <h2 className="login-form-title">Welcome Back!</h2>
-            <Form
-              form={form}
-              {...layout}
-              name="basic"
-              layout="vertical"
-              initialValues={{ remember: true }}
-              onFinish={onFinish}
-            >
-              <Form.Item
-                label="用户名"
-                name="username"
-                rules={[{ required: true, message: '请输入用户名！' }]}
-              >
-                <Input />
-              </Form.Item>
-
-              <Form.Item
-                label="密码"
-                name="password"
-                rules={[{ required: true, message: '请输入密码！' }]}
-              >
-                <Input.Password />
-              </Form.Item>
-
-              <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-                <Checkbox>记住密码</Checkbox>
-              </Form.Item>
-
-              <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit" loading={loading}>
-                  登陆
-                </Button>
-              </Form.Item>
-            </Form>
-          </div>
+    <div className="login">
+      <video id="login-video" autoPlay={true} loop={true} muted={true}>
+        <source src={require('../../assets/videos/login.mp4').default} type="video/mp4" />
+      </video>
+      <div className="form-wrapper">
+        <div className="form-wrapper-logo" />
+        <h2>登陆</h2>
+        <div className="login-form">
+          <Form
+            form={form}
+            {...layout}
+            name="basic"
+            layout="vertical"
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+          >
+            <Form.Item name="username" rules={[{ required: true, message: '请输入用户名！' }]}>
+              <Input placeholder="请输入用户名" />
+            </Form.Item>
+            <Form.Item name="password" rules={[{ required: true, message: '请输入密码！' }]}>
+              <Input.Password placeholder="请输入密码" />
+            </Form.Item>
+            <Row>
+              <Col span={12}>
+                <Form.Item
+                  {...tailLayout}
+                  name="remember"
+                  valuePropName="checked"
+                  style={{ textAlign: 'left', marginBottom: '12px' }}
+                >
+                  <Checkbox>记住密码</Checkbox>
+                </Form.Item>
+              </Col>
+              <Col span={12} style={{ textAlign: 'right', lineHeight: '32px' }}>
+                <span>忘记密码</span>
+              </Col>
+            </Row>
+            <Form.Item {...tailLayout}>
+              <Button type="primary" htmlType="submit" loading={loading} style={{ width: '100%' }}>
+                登陆
+              </Button>
+            </Form.Item>
+          </Form>
+          <Divider />
+          <p className="text-muted">其他登陆方式</p>
+          <Divider />
+          <p className="text-muted">没有账号？</p>
+          <Button>立即注册</Button>
         </div>
       </div>
     </div>

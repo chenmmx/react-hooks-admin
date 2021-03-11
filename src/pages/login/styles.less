@@ -1,62 +1,90 @@
-.container {
+.login {
   width: 100%;
-  height: 100vh;
-  min-height: 800px;
-  background: url('../../assets/images/login_form.jpg') 0 0 no-repeat;
-  background-size: 100% 100%;
-  position: relative;
-  &-main {
-    position: absolute;
-    top: 200px;
-    left: 50%;
-    width: 750px;
-    height: 400px;
-    border-radius: 16px;
-    transform: translateX(-50%);
-    z-index: 1;
-    background-position: center top;
-    background-size: cover;
-    overflow: hidden;
-    display: flex;
-    justify-content: space-between;
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      margin: -30px;
-      background-color: rgba(255, 255, 255, 0.8);
-      z-index: -1;
-      background-image: url('../../assets/images/login_form.jpg');
-      background-position: center top;
-      background-size: cover;
-      background-attachment: fixed;
-      -webkit-filter: blur(10px);
-      -moz-filter: blur(10px);
-      -ms-filter: blur(10px);
-      -o-filter: blur(10px);
-      filter: blur(10px);
+  height: 100%;
+  overflow: hidden;
+  @media screen and (max-width: 576px) {
+    padding: 20px;
+  }
+  #login-video {
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    min-width: 100%;
+    min-height: 100%;
+    height: auto;
+    width: auto;
+    /*加滤镜*/
+    // filter: blur(15px); //背景模糊设置
+    // -webkit-filter: grayscale(100%);
+    // filter:grayscale(100%); //背景灰度设置
+    z-index: -11;
+    source {
+      min-width: 100%;
+      min-height: 100%;
+      height: auto;
+      width: auto;
     }
-    .main-left {
-      width: 50%;
-      height: 100%;
-      background: url('https://img2.huashi6.com/images/resource/2020/11/23/85h842354p0.png?imageView2/3/q/100/interlace/1/w/1600/h/1600/format/webp')
-        0 0 no-repeat;
-      background-size: 100% 100%;
+  }
+  .form-wrapper {
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+    padding: 3rem 3rem 2rem;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    width: 430px;
+    margin: 100px auto;
+    text-align: center;
+    transition: box-shadow 0.3s ease-in-out;
+    @media screen and (max-width: 576px) {
+      margin: 60px auto;
+      padding-right: 20px;
+      padding-left: 20px;
+      width: 100% !important;
+      margin-bottom: 20px;
     }
-    .main-right {
-      width: 50%;
-      .login-form {
-        padding: 16px;
-        &-title {
-          text-align: center;
-          color: #fff;
-        }
-        .ant-form {
-          margin-top: 32px;
-        }
+    &:hover {
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    &-logo {
+      background-color: #fff;
+      width: 100px;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -moz-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -moz-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      height: 100px;
+      text-align: center;
+      margin-bottom: 2rem;
+      margin-top: -100px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 20px;
+      background: url('../../assets/images/login_icon.jpeg') 0 0 no-repeat;
+      background-size: 100%;
+    }
+    .login-form {
+      padding: 16px;
+      .text-muted {
+        color: #6c757d;
+      }
+      &-title {
+        text-align: center;
+        color: #fff;
       }
     }
   }
