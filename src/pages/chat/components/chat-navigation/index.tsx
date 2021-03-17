@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC, ReactElement } from 'react';
 import {
   MessageOutlined,
@@ -74,7 +75,7 @@ const userMenu: ReactElement = (
     {userMenuList.map((menu) => {
       return (
         <Menu.Item key={menu.key}>
-          <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+          <a target="_blank" rel="noopener noreferrer" href="#">
             {menu.name}
           </a>
         </Menu.Item>

@@ -21,6 +21,7 @@ const Login: FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [form] = Form.useForm();
   const history = useHistory();
+
   useEffect(() => {
     const userInfo: any = JSON.parse(window.localStorage.getItem('user_info') || '{}') || {};
     if (userInfo.remember) {
