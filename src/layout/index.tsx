@@ -37,7 +37,7 @@ const AppLayout: FC = (props: any) => {
     },
     {
       id: '2',
-      name: '聊天室',
+      name: 'SlekChat',
       key: '/chat',
     },
     {
@@ -141,7 +141,7 @@ const AppLayout: FC = (props: any) => {
         <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
           <div
             className="site-layout-background"
-            style={{ padding: 24, textAlign: 'center', minHeight: 'calc(100vh - 142px)' }}
+            style={{ padding: 24, minHeight: 'calc(100vh - 142px)' }}
           >
             <Switch>
               {props.routes.map((item: RouteConfigProps) => {
@@ -150,7 +150,7 @@ const AppLayout: FC = (props: any) => {
             </Switch>
           </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2021 Created by chenmmx</Footer>
+        <Footer style={{ textAlign: 'center' }}>DoDo ©2021 Created by chenmmx</Footer>
       </Layout>
     </Layout>
   );

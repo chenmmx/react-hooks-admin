@@ -1,9 +1,86 @@
 .chat {
   border: 1px solid #ebebeb;
   border-radius: 5px;
+  height: calc(100vh - 192px);
+  min-height: 490px;
   &-layout {
     min-height: 480px;
     height: 100%;
     display: flex;
+    &-content {
+      display: flex;
+      justify-content: space-between;
+      flex: 1;
+      .sidebar-group {
+        display: flex;
+        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        border-right: 1px solid #e6e6e6;
+        width: 350px;
+        .sidebar {
+          background-color: #fff;
+          border-radius: 5px;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          > header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            height: 80px;
+            font-weight: 600;
+            border-radius: 0;
+            > span {
+              font-size: 22px;
+              color: #343a40;
+            }
+            > .btn-group {
+              .ant-btn {
+                margin-left: .5rem;
+              }
+            }
+          }
+          .search-form {
+            padding: 17px 30px;
+          }
+          &-body {
+            overflow-x: hidden;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+            overflow: -moz-scrollbars-none;
+            outline: none;
+            height: calc(100% - 156px);
+            &::-webkit-scrollbar { width: 0 !important }
+            .ant-list-item {
+              text-align: left;
+              padding: 17px 30px;
+              cursor: pointer;
+              align-items: flex-start;
+              transition: background-color .3s ease;
+              &.active {
+                background-color: #f0f0f0;
+                transition: background-color .3s ease;
+              }
+              .ant-list-item-meta-description {
+                font-weight: 600;
+                color: #646464;
+                white-space: nowrap;
+                -o-text-overflow: ellipsis;
+                text-overflow: ellipsis;
+                overflow: hidden;
+              }
+              .text-muted {
+                font-size: 80%;
+                font-weight: 400;
+                color: #6c757d;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

@@ -3,10 +3,11 @@
   border-right: 1px solid #ebebeb;
   .nav-group {
     width: 100px;
+    height: 100%;
     &-list {
       display: flex;
       flex-direction: column;
-      height: calc(var(--vh, 1vh) * 100 - 200px);
+      height: 100%;
       margin: 0;
       padding: 0;
       &-item {
@@ -20,6 +21,7 @@
           transition: all 0.3s;
           &.active {
             background-color: #e6e6e6;
+            transition: all .3s;
             > span {
               color: #0a80ff !important;
             }

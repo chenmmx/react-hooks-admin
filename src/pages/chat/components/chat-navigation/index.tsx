@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useContext } from 'react';
+import { Context } from '../../index';
+import { CHANGE_SELECT_NAV_KEY } from '../../context';
 import {
   MessageOutlined,
   UserOutlined,
@@ -9,9 +11,9 @@ import {
 } from '@ant-design/icons';
 import { Badge, Menu, Tooltip, Dropdown } from 'antd';
 import './styles.less';
-
 interface MenuObject {
   id: number;
+  key: string;
   icon: ReactElement;
   name: string;
   messageCount: number;
@@ -25,30 +27,35 @@ interface UserMenuObj {
 const menuList: MenuObject[] = [
   {
     id: 1,
+    key: 'message',
     icon: <MessageOutlined style={{ fontSize: '1.2rem' }} />,
     name: '消息',
     messageCount: 1,
   },
   {
     id: 2,
+    key: 'friends',
     icon: <UserOutlined style={{ fontSize: '1.2rem' }} />,
     name: '朋友',
     messageCount: 0,
   },
   {
     id: 3,
+    key: 'favorites',
     icon: <StarOutlined style={{ fontSize: '1.2rem' }} />,
     name: '收藏',
     messageCount: 0,
   },
   {
     id: 4,
+    key: 'archived',
     icon: <InboxOutlined style={{ fontSize: '1.2rem' }} />,
     name: '存档',
     messageCount: 0,
   },
   {
     id: 5,
+    key: 'switchMode',
     icon: <SkinOutlined style={{ fontSize: '1.2rem' }} />,
     name: '主题切换',
     messageCount: 0,
@@ -89,6 +96,14 @@ const userMenu: ReactElement = (
 );
 
 const Chat: FC = () => {
+  const { state, dispatch } = useContext(Context);
+
+  const onNavClick = (key: string) => {
+    if (dispatch) {
+      dispatch({ type: CHANGE_SELECT_NAV_KEY, id: key });
+    }
+  };
+
   return (
     <div className="chat-layout-navigation">
       <div className="nav-group">
@@ -108,7 +123,11 @@ const Chat: FC = () => {
                 key={menu.id}
               >
                 <Tooltip placement="right" title={menu.name}>
-                  <a href="#" className={menu.id === 1 ? 'active' : ''}>
+                  <a
+                    href="#"
+                    className={state.selectNavKey === menu.key ? 'active' : ''}
+                    onClick={() => onNavClick(menu.key)}
+                  >
                     <Badge dot={true} count={menu.messageCount}>
                       {menu.icon}
                     </Badge>
@@ -120,7 +139,7 @@ const Chat: FC = () => {
           <li className="nav-group-list-item logo">
             <a href="#">
               <Dropdown overlay={userMenu} trigger={['click']} placement="topLeft">
-                <img src={require('@/assets/images/login_icon.jpeg').default} alt="" />
+                <img src="https://api.sunweihu.com/api/sjtx/api.php" alt="" />
               </Dropdown>
             </a>
           </li>

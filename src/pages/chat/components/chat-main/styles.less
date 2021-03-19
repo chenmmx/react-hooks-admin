@@ -1,0 +1,109 @@
+.chat-main {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 17px 30px;
+    border-bottom: 1px solid #e6e6e6;
+    &-user {
+      display: flex;
+      align-items: center;
+      > div {
+        margin-left: 16px;
+        text-align: left;
+        > h3 {
+          margin-bottom: 0;
+        }
+        > span {
+          font-size: 80%;
+          color: #493b32;
+        }
+      }
+    }
+    &-action {
+      &-btn {
+        margin-left: 8px;
+      }
+    }
+  }
+  &-body {
+    padding: 30px;
+    height: calc(100% - 233px);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    .messages {
+      display: flex;
+      -webkit-box-orient: vertical;
+      flex-direction: column;
+      align-items: flex-start;
+      .message-item {
+        max-width: 75%;
+        margin-bottom: 3rem;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        &-header {
+          display: flex;
+          align-items: center;
+          margin-bottom: 1rem;
+          > div {
+            margin-left: 1rem;
+            > h3 {
+              font-size: 15px;
+              margin-bottom: 0;
+            }
+            .time {
+              color: #828282;
+              margin-top: 2px;
+              font-style: italic;
+              font-size: 12px;
+            }
+          }
+        }
+        &-content {
+          background: #ebebeb;
+          -webkit-border-radius: 7px;
+          -moz-border-radius: 7px;
+          border-radius: 7px;
+          padding: 10px 20px;
+        }
+        &.outgoing-message {
+          margin-left: auto;
+          .message-item-header {
+            justify-content: flex-end;
+          }
+          .message-item-content {
+            background-color: #0a80ff;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+  &-footer {
+    border-top: 1px solid #e6e6e6;
+    padding: 17px 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    text-align: left;
+    &-input {
+      flex: 1;
+    }
+    &-btns {
+      text-align: right;
+      margin-top: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      > div {
+        .ant-btn {
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+}
