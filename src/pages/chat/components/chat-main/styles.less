@@ -31,54 +31,64 @@
     }
   }
   &-body {
-    padding: 30px;
+    padding: 0 30px;
     height: calc(100% - 233px);
-    overflow-x: hidden;
-    overflow-y: scroll;
-    .messages {
-      display: flex;
-      -webkit-box-orient: vertical;
-      flex-direction: column;
-      align-items: flex-start;
-      .message-item {
-        max-width: 75%;
-        margin-bottom: 3rem;
-        &:last-child {
-          margin-bottom: 0;
-        }
-        &-header {
-          display: flex;
-          align-items: center;
-          margin-bottom: 1rem;
-          > div {
-            margin-left: 1rem;
-            > h3 {
-              font-size: 15px;
-              margin-bottom: 0;
-            }
-            .time {
-              color: #828282;
-              margin-top: 2px;
-              font-style: italic;
-              font-size: 12px;
+    &-wrapper {
+      height: 100%;
+      overflow: auto;
+      .loader {
+        width: 100%;
+        text-align: center;
+        padding-top: 1rem;
+      }
+      .messages {
+        display: flex;
+        -webkit-box-orient: vertical;
+        flex-direction: column;
+        align-items: flex-start;
+        .message-item {
+          max-width: 75%;
+          margin-bottom: 3rem;
+          &:last-child {
+            margin-bottom: 1rem;
+          }
+          &:first-child {
+            margin-top: 1rem;
+          }
+          &-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            > div {
+              margin-left: 1rem;
+              > h3 {
+                font-size: 15px;
+                margin-bottom: 0;
+              }
+              .time {
+                color: #828282;
+                margin-top: 2px;
+                font-style: italic;
+                font-size: 12px;
+              }
             }
           }
-        }
-        &-content {
-          background: #ebebeb;
-          -webkit-border-radius: 7px;
-          -moz-border-radius: 7px;
-          border-radius: 7px;
-          padding: 10px 20px;
-        }
-        &.outgoing-message {
-          margin-left: auto;
-          .message-item-header {
-            justify-content: flex-end;
+          &-content {
+            background: #ebebeb;
+            -webkit-border-radius: 7px;
+            -moz-border-radius: 7px;
+            border-radius: 7px;
+            padding: 10px 20px;
           }
-          .message-item-content {
-            background-color: #0a80ff;
-            color: #fff;
+          &.outgoing-message {
+            margin-left: auto;
+            .message-item-header {
+              justify-content: flex-end;
+            }
+            .message-item-content {
+              background-color: #0a80ff;
+              color: #fff;
+            }
           }
         }
       }

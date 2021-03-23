@@ -14,10 +14,6 @@ export const Context = createContext<MixStateAndDispatch>({
 const Chat: FC = () => {
   const [state, dispatch] = useReducer(reducer, defaultState);
 
-  // const [navKey, setNavKey] = useState<string>('message');
-  // const getNavKey = useCallback((key: string) => {
-  //   setNavKey((prev) => (prev = key));
-  // }, []);
   return (
     <div className="chat">
       <div className="chat-layout">

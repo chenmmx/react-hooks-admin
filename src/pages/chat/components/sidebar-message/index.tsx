@@ -113,7 +113,7 @@ const SidebarMessage: FC = () => {
               <List.Item.Meta
                 avatar={
                   <Badge count={item.messageCount}>
-                    <Avatar src={item.avatar} />
+                    <Avatar src={item.avatar + `?${item.id}`} />
                   </Badge>
                 }
                 title={item.title}

@@ -1,6 +1,10 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, useContext } from 'react';
 import './styles.less';
 import { Avatar, Button, Input, Spin } from 'antd';
+import BScroll from '@better-scroll/core';
+import MouseWheel from '@better-scroll/mouse-wheel';
+import PullDown from '@better-scroll/pull-down';
+import { Context } from '../../index';
 import {
   PhoneTwoTone,
   VideoCameraTwoTone,
@@ -9,9 +13,12 @@ import {
   PlusCircleOutlined,
   LoadingOutlined,
 } from '@ant-design/icons';
-const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin={true} />;
 
+BScroll.use(MouseWheel);
+BScroll.use(PullDown);
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin={true} />;
 const { TextArea } = Input;
+let scroll: any = null;
 
 const result = {
   status: 0,
@@ -29,7 +36,7 @@ const result = {
     {
       id: '1',
       name: '嘟嘟',
-      content: '哈哈哈哈哈哈哈哈哈哈哈，我真逗！',
+      content: '天王盖地虎！',
       avatar: 'https://api.sunweihu.com/api/sjtx/api.php',
       type: 'other',
       date: '上午 9:32',
@@ -37,7 +44,7 @@ const result = {
     {
       id: '2',
       name: '嘟嘟',
-      content: '哈哈哈哈哈哈哈哈哈哈哈，我真逗！',
+      content: '宝塔镇河妖！',
       avatar: 'https://api.sunweihu.com/api/sjtx/api.php',
       type: 'other',
       date: '上午 9:33',
@@ -61,6 +68,25 @@ const result = {
   ],
 };
 
+const fakeData = [
+  {
+    id: '99',
+    name: '糖糖',
+    content: '天上没有乌云盖！',
+    avatar: 'https://api.sunweihu.com/api/sjtx/api.php',
+    type: 'mine',
+    date: '上午 8:20',
+  },
+  {
+    id: '88',
+    name: '嘟嘟',
+    content: '为什么你又掉下来？',
+    avatar: 'https://api.sunweihu.com/api/sjtx/api.php',
+    type: 'other',
+    date: '上午 8:32',
+  },
+];
+
 const getData: any = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -70,18 +96,68 @@ const getData: any = () => {
 };
 
 const ChatMain: FC = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const { state } = useContext(Context);
+  const [isPullingDown, setIsPullingDown] = useState<boolean>(false);
+  const [hasMore, setHasMore] = useState<boolean>(true);
   const [comments, setComments] = useState<any>([]);
 
+  // init bsscroll
   useEffect(() => {
+    scroll = new BScroll('.chat-main .chat-main-body .chat-main-body-wrapper', {
+      scrollX: false,
+      scrollY: true,
+      click: true,
+      pullDownRefresh: true,
+      mouseWheel: {
+        speed: 10,
+      },
+    });
+
+    return () => {
+      scroll.stop();
+      scroll.destroy();
+    };
+  }, []);
+
+  // fetch data
+  useEffect(() => {
+    setComments((prev: any) => (prev = []));
     const fetchData = async () => {
-      setLoading((prev) => (prev = true));
-      const { data } = await getData();
-      setLoading((prev) => (prev = false));
+      const { data } = await getData(state.id);
+      setHasMore((prev) => (prev = true));
       setComments((prev: any) => (prev = data));
+      scroll.refresh();
     };
     fetchData();
-  }, []);
+  }, [state.id]);
+
+  // load more
+  useEffect(() => {
+    const pullingDownHandler = (): void => {
+      if (!hasMore) return;
+      setIsPullingDown((prev) => (prev = true));
+      setTimeout(() => {
+        setComments((prev: any) => [...fakeData, ...prev]);
+        setIsPullingDown((prev: boolean) => (prev = false));
+        setHasMore((prev: boolean) => (prev = true));
+      }, 500);
+      finishPullDown();
+    };
+    scroll.on('pullingDown', pullingDownHandler);
+  }, [hasMore]);
+
+  // load more finish
+  const finishPullDown = (): void => {
+    scroll.finishPullDown();
+    setTimeout(() => {
+      scroll.refresh();
+    }, 800);
+  };
+
+  const sendComment = (): void => {
+    console.log(123);
+  };
+
   return (
     <div className="chat-main">
       <div className="chat-main-header">
@@ -99,8 +175,13 @@ const ChatMain: FC = () => {
         </div>
       </div>
       <div className="chat-main-body">
-        <Spin indicator={antIcon} spinning={loading}>
+        <div className="chat-main-body-wrapper">
           <div className="messages">
+            {isPullingDown && hasMore ? (
+              <div className="loader">
+                <Spin indicator={antIcon} spinning={true} />
+              </div>
+            ) : null}
             {comments.map((comment: any) => {
               return (
                 <div
@@ -111,7 +192,7 @@ const ChatMain: FC = () => {
                   key={comment.id}
                 >
                   <div className="message-item-header">
-                    <Avatar size="large" src={comment.avatar} />
+                    <Avatar size="large" src={comment.avatar + `?${comment.id}`} />
                     <div>
                       <h3>{comment.name}</h3>
                       <div className="time">{comment.date}</div>
@@ -122,7 +203,7 @@ const ChatMain: FC = () => {
               );
             })}
           </div>
-        </Spin>
+        </div>
       </div>
       <div className="chat-main-footer">
         <div className="chat-main-footer-input">
@@ -133,7 +214,9 @@ const ChatMain: FC = () => {
             <Button icon={<SmileOutlined />} />
             <Button icon={<PlusCircleOutlined />} />
           </div>
-          <Button type="primary">发送</Button>
+          <Button type="primary" onClick={sendComment}>
+            发送
+          </Button>
         </div>
       </div>
     </div>
