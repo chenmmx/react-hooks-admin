@@ -15,7 +15,7 @@ const Chat: FC = () => {
   const [state, dispatch] = useReducer(reducer, defaultState);
 
   return (
-    <div className="chat">
+    <div className={['chat', state.mode].join(' ')}>
       <div className="chat-layout">
         <Context.Provider value={{ state, dispatch }}>
           <ChatNavigation />
@@ -34,7 +34,7 @@ const Chat: FC = () => {
                 }
               })()}
             </div>
-            <ChatMain />
+            {state.id ? <ChatMain /> : null}
           </div>
         </Context.Provider>
       </div>

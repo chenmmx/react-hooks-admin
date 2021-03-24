@@ -3,6 +3,7 @@
   border-radius: 5px;
   height: calc(100vh - 192px);
   min-height: 490px;
+  transition: background-color 0.3s;
   &-layout {
     min-height: 480px;
     height: 100%;
@@ -39,7 +40,7 @@
             }
             > .btn-group {
               .ant-btn {
-                margin-left: .5rem;
+                margin-left: 0.5rem;
               }
             }
           }
@@ -53,16 +54,18 @@
             overflow: -moz-scrollbars-none;
             outline: none;
             height: calc(100% - 156px);
-            &::-webkit-scrollbar { width: 0 !important }
+            &::-webkit-scrollbar {
+              width: 0 !important;
+            }
             .ant-list-item {
               text-align: left;
               padding: 17px 30px;
               cursor: pointer;
               align-items: flex-start;
-              transition: background-color .3s ease;
+              transition: background-color 0.3s ease;
               &.active {
                 background-color: #f0f0f0;
-                transition: background-color .3s ease;
+                transition: background-color 0.3s ease;
               }
               .ant-list-item-meta-description {
                 font-weight: 600;
@@ -81,6 +84,81 @@
           }
         }
       }
+    }
+  }
+  &.dark {
+    transition: all 0.3s;
+    background-color: #1a2236;
+    color: rgba(255, 255, 255, 0.75);
+    .chat-layout-navigation {
+      background-color: #1a2236 !important;
+      color: rgba(255, 255, 255, 0.75) !important;
+      border-right-color: #293145 !important;
+    }
+    .sidebar {
+      background-color: #1a2236 !important;
+      color: rgba(255, 255, 255, 0.75) !important;
+    }
+    .sidebar-group {
+      border-right-color: #293145 !important;
+    }
+    .chat-layout-content .sidebar-group .sidebar-body .ant-list-item {
+      border-bottom-color: #293145 !important;
+    }
+    .chat-layout-navigation .nav-group-list-item:not(.logo) > a > span {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .chat-layout-navigation .nav-group-list-item > a.active {
+      background-color: #0a80ff;
+    }
+    .chat-layout-content .sidebar-group .sidebar > header > span {
+      color: rgba(255, 255, 255, 0.75);
+    }
+    .ant-input {
+      transition: all 0.3s;
+      background-color: #1a2236 !important;
+      border-color: #293145 !important;
+      color: rgba(255, 255, 255, 0.7) !important;
+    }
+    .chat-layout-content .sidebar-group .sidebar-body .ant-list-item.active {
+      background-color: #1f273b;
+    }
+    .ant-list-item-meta-title {
+      color: rgba(255, 255, 255, 0.75) !important;
+    }
+    .chat-layout-content
+      .sidebar-group
+      .sidebar-body
+      .ant-list-item
+      .ant-list-item-meta-description {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .chat-main-header {
+      border-bottom-color: #293145;
+    }
+    .chat-main-footer {
+      border-top-color: #293145;
+    }
+    .chat-main-header-user > div > h3 {
+      color: rgba(255, 255, 255, 0.75);
+    }
+    .chat-main-header-user > div > span {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .chat-main-body-wrapper .messages .message-item-header > div > h3 {
+      color: rgba(255, 255, 255, 0.75);
+    }
+    .chat-main-body-wrapper .messages .message-item-header > div .time {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .chat-main-body-wrapper .messages .message-item-content {
+      background-color: #293145;
+    }
+    .ant-btn-icon-only {
+      transition: all 0.3s;
+      color: rgba(255, 255, 255, 0.75) !important;
+      background-color: #1a2236 !important;
+      border-color: #293145 !important;
     }
   }
 }

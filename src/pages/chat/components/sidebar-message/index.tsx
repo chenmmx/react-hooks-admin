@@ -7,7 +7,7 @@ import { UsergroupAddOutlined, PlusCircleOutlined } from '@ant-design/icons';
 const data = [
   {
     id: '1',
-    title: '张三',
+    name: '张三',
     latestNews: '你是傻逼吗？啊？',
     time: '昨天',
     messageCount: 12,
@@ -15,7 +15,7 @@ const data = [
   },
   {
     id: '2',
-    title: '李四',
+    name: '李四',
     latestNews: '周末一起出去玩啊',
     time: '11:05 AM',
     messageCount: 0,
@@ -23,7 +23,7 @@ const data = [
   },
   {
     id: '3',
-    title: '王小二',
+    name: '王小二',
     latestNews: 'Hello!',
     time: '03:42 PM',
     messageCount: 0,
@@ -31,7 +31,7 @@ const data = [
   },
   {
     id: '4',
-    title: '葛二蛋',
+    name: '葛二蛋',
     latestNews: '你是傻逼吗？啊？',
     time: '前天',
     messageCount: 0,
@@ -39,7 +39,7 @@ const data = [
   },
   {
     id: '5',
-    title: '葛二蛋',
+    name: '葛二蛋',
     latestNews: '你是傻逼吗？啊？',
     time: '前天',
     messageCount: 0,
@@ -47,7 +47,7 @@ const data = [
   },
   {
     id: '6',
-    title: '葛二蛋',
+    name: '葛二蛋',
     latestNews: '你是傻逼吗？啊？',
     time: '前天',
     messageCount: 0,
@@ -55,7 +55,7 @@ const data = [
   },
   {
     id: '7',
-    title: '葛二蛋',
+    name: '葛二蛋',
     latestNews: '你是傻逼吗？啊？',
     time: '前天',
     messageCount: 0,
@@ -63,7 +63,7 @@ const data = [
   },
   {
     id: '8',
-    title: '葛二蛋',
+    name: '葛二蛋',
     latestNews: '你是傻逼吗？啊？',
     time: '前天',
     messageCount: 0,
@@ -71,7 +71,7 @@ const data = [
   },
   {
     id: '9',
-    title: '葛二蛋',
+    name: '葛二蛋',
     latestNews: '你是傻逼吗？啊？',
     time: '前天',
     messageCount: 0,
@@ -83,12 +83,12 @@ const SidebarMessage: FC = () => {
   const { state, dispatch } = useContext(Context);
   const onMessageClick = (id: string): void => {
     if (dispatch) {
-      dispatch({ type: CHANGE_SELECT_COMMENT_ID, id });
+      dispatch({ type: CHANGE_SELECT_COMMENT_ID, data: id });
     }
   };
 
   return (
-    <div className="sidebar sidebar-friends">
+    <div className="sidebar sidebar-message">
       <header>
         <span>消息</span>
         <div className="btn-group">
@@ -116,7 +116,7 @@ const SidebarMessage: FC = () => {
                     <Avatar src={item.avatar + `?${item.id}`} />
                   </Badge>
                 }
-                title={item.title}
+                title={item.name}
                 description={item.latestNews}
               />
               <span className="text-muted">{item.time}</span>

@@ -19,6 +19,7 @@ BScroll.use(PullDown);
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin={true} />;
 const { TextArea } = Input;
 let scroll: any = null;
+let STEP = 0;
 
 const result = {
   status: 0,
@@ -91,15 +92,47 @@ const getData: any = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(result);
-    }, 1000);
+    }, 600);
+  });
+};
+
+const fetchMoreData: any = (id: string, pageIndex: number, pageSize: number) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (Number(id) % 2 === 0) {
+        resolve({
+          status: 0,
+          message: 'success',
+          data: [],
+        });
+      } else {
+        resolve({
+          status: 0,
+          message: 'success',
+          data: fakeData,
+        });
+      }
+    }, 600);
   });
 };
 
 const ChatMain: FC = () => {
   const { state } = useContext(Context);
   const [isPullingDown, setIsPullingDown] = useState<boolean>(false);
-  const [hasMore, setHasMore] = useState<boolean>(true);
   const [comments, setComments] = useState<any>([]);
+
+  // fetch data
+  useEffect(() => {
+    setComments((prev: any) => (prev = []));
+    STEP = 0;
+    const fetchData = async () => {
+      const { data } = await getData(state.id);
+      setComments((prev: any) => (prev = data));
+      scroll.refresh();
+      scrollToBottom();
+    };
+    fetchData();
+  }, [state.id]);
 
   // init bsscroll
   useEffect(() => {
@@ -113,38 +146,21 @@ const ChatMain: FC = () => {
       },
     });
 
+    const pullingDownHandler = async () => {
+      STEP += 1;
+      setIsPullingDown((prev) => (prev = true));
+      const { data } = await fetchMoreData(state.id, STEP, 10);
+      setComments((prev: any) => [...data, ...prev]);
+      setIsPullingDown((prev: boolean) => (prev = false));
+      finishPullDown();
+    };
+    scroll.on('pullingDown', pullingDownHandler);
+
     return () => {
       scroll.stop();
       scroll.destroy();
     };
-  }, []);
-
-  // fetch data
-  useEffect(() => {
-    setComments((prev: any) => (prev = []));
-    const fetchData = async () => {
-      const { data } = await getData(state.id);
-      setHasMore((prev) => (prev = true));
-      setComments((prev: any) => (prev = data));
-      scroll.refresh();
-    };
-    fetchData();
   }, [state.id]);
-
-  // load more
-  useEffect(() => {
-    const pullingDownHandler = (): void => {
-      if (!hasMore) return;
-      setIsPullingDown((prev) => (prev = true));
-      setTimeout(() => {
-        setComments((prev: any) => [...fakeData, ...prev]);
-        setIsPullingDown((prev: boolean) => (prev = false));
-        setHasMore((prev: boolean) => (prev = true));
-      }, 500);
-      finishPullDown();
-    };
-    scroll.on('pullingDown', pullingDownHandler);
-  }, [hasMore]);
 
   // load more finish
   const finishPullDown = (): void => {
@@ -152,6 +168,10 @@ const ChatMain: FC = () => {
     setTimeout(() => {
       scroll.refresh();
     }, 800);
+  };
+
+  const scrollToBottom = (): void => {
+    scroll.scrollTo(0, scroll.maxScrollY);
   };
 
   const sendComment = (): void => {
@@ -177,7 +197,7 @@ const ChatMain: FC = () => {
       <div className="chat-main-body">
         <div className="chat-main-body-wrapper">
           <div className="messages">
-            {isPullingDown && hasMore ? (
+            {isPullingDown ? (
               <div className="loader">
                 <Spin indicator={antIcon} spinning={true} />
               </div>

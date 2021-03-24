@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC, ReactElement, useContext } from 'react';
 import { Context } from '../../index';
-import { CHANGE_SELECT_NAV_KEY } from '../../context';
+import { CHANGE_SELECT_NAV_KEY, CHANGE_SELECT_COMMENT_ID, CHANGE_SKIN } from '../../context';
 import {
   MessageOutlined,
   UserOutlined,
@@ -55,7 +55,7 @@ const menuList: MenuObject[] = [
   },
   {
     id: 5,
-    key: 'switchMode',
+    key: 'switch_skin',
     icon: <SkinOutlined style={{ fontSize: '1.2rem' }} />,
     name: '主题切换',
     messageCount: 0,
@@ -99,8 +99,16 @@ const Chat: FC = () => {
   const { state, dispatch } = useContext(Context);
 
   const onNavClick = (key: string) => {
-    if (dispatch) {
-      dispatch({ type: CHANGE_SELECT_NAV_KEY, id: key });
+    if (key === 'switch_skin') {
+      if (dispatch) {
+        dispatch({ type: CHANGE_SKIN, data: state.mode === 'primary' ? 'dark' : 'primary' });
+      }
+    } else {
+      if (state.selectNavKey === key) return;
+      if (dispatch) {
+        dispatch({ type: CHANGE_SELECT_NAV_KEY, data: key });
+        dispatch({ type: CHANGE_SELECT_COMMENT_ID, data: '' });
+      }
     }
   };
 
