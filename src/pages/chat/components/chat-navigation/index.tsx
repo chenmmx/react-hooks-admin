@@ -10,7 +10,7 @@ import {
   SkinOutlined,
 } from '@ant-design/icons';
 import { Badge, Menu, Tooltip, Dropdown } from 'antd';
-import './styles.less';
+import './index.less';
 interface MenuObject {
   id: number;
   key: string;

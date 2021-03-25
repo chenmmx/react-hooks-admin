@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, notification, Row, Col, Divider } from 'antd';
-import './styles.less';
+import './index.less';
 
 const layout = {
   labelCol: { span: 8 },

@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Dropdown, Badge, Tabs, List, Avatar } from 'antd';
 import { BellOutlined } from '@ant-design/icons';
-import './styles.less';
+import './index.less';
 
 const Notification: FC = () => {
   const { TabPane } = Tabs;

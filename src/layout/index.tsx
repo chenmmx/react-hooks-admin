@@ -11,7 +11,7 @@ import {
   QuestionCircleOutlined,
 } from '@ant-design/icons';
 import Notification from './components/notification';
-import './styles.less';
+import './index.less';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;

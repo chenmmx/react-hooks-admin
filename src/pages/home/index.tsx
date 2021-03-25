@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './styles.less';
+import './index.less';
 
 const Home: React.FC = () => {
   return <div className="home" />;

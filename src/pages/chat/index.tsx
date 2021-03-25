@@ -1,6 +1,6 @@
 import React, { FC, useReducer, createContext } from 'react';
 import { reducer, defaultState, MixStateAndDispatch } from './context';
-import './styles.less';
+import './index.less';
 import ChatNavigation from './components/chat-navigation';
 import SidebarMessage from './components/sidebar-message';
 import SidebarFriends from './components/sidebar-friends';
