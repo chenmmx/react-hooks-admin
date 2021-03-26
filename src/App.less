@@ -1,1 +1,31 @@
 @import '~antd/dist/antd.css';
+
+body {
+  .ant-modal-root {
+    .ant-modal-content {
+      border-radius: 8px;
+      .al-center {
+        text-align: center;
+      }
+      .al-right {
+        text-align: right;
+      }
+      .ant-modal-close {
+        color: #fff;
+        .ant-modal-close-icon {
+          transition: all 0.5s;
+          &:hover {
+            transition: all 0.5s;
+            transform: rotate(180deg);
+          }
+        }
+      }
+      .ant-modal-header {
+        background-color: #0a80ff;
+        .ant-modal-title {
+          color: #fff;
+        }
+      }
+    }
+  }
+}

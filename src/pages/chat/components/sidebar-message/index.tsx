@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react';
 import { Context } from '../../index';
-import { CHANGE_SELECT_COMMENT_ID } from '../../context';
+import { CHANGE_SELECT_COMMENT_ID, OPEN_MODAL, CHANGE_MODAL_TYPE } from '../../context';
 import { Button, Input, List, Avatar, Badge } from 'antd';
 import { UsergroupAddOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
@@ -86,13 +86,19 @@ const SidebarMessage: FC = () => {
       dispatch({ type: CHANGE_SELECT_COMMENT_ID, data: id });
     }
   };
+  const onAddUserGroup = (): void => {
+    if (dispatch) {
+      dispatch({ type: OPEN_MODAL });
+      dispatch({ type: CHANGE_MODAL_TYPE, data: { type: 'add_group', title: '新增分组' } });
+    }
+  };
 
   return (
     <div className="sidebar sidebar-message">
       <header>
         <span>消息</span>
         <div className="btn-group">
-          <Button icon={<UsergroupAddOutlined />} />
+          <Button icon={<UsergroupAddOutlined />} onClick={onAddUserGroup} />
           <Button icon={<PlusCircleOutlined />} />
         </div>
       </header>

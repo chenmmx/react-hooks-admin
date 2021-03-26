@@ -1,0 +1,2 @@
+(this["webpackJsonphook-ts-demo"]=this["webpackJsonphook-ts-demo"]||[]).push([[11],{271:function(o,s,t){},283:function(o,s,t){"use strict";t.r(s);var e=t(9);t(0),t(271);s.default=function(){return Object(e.jsx)("div",{className:"home"})}}}]);
+//# sourceMappingURL=11.15044012.chunk.js.map
