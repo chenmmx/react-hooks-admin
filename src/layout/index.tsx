@@ -1,3 +1,5 @@
+/* eslint-disable no-script-url */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC, useEffect, useState } from 'react';
 import { Switch } from 'react-router-dom';
 import { SubRoute } from '../router/subRoute';
@@ -74,7 +76,12 @@ const AppLayout: FC = (props: any) => {
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="2">
-        <a href="/login">
+        <a
+          href="javascript:void(0);"
+          onClick={() => {
+            history.push('/login');
+          }}
+        >
           <LogoutOutlined />
           退出登陆
         </a>

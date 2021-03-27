@@ -1,3 +1,4 @@
+/* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC, ReactElement, useContext } from 'react';
 import { Context } from '../../index';
@@ -82,7 +83,7 @@ const userMenu: ReactElement = (
     {userMenuList.map((menu) => {
       return (
         <Menu.Item key={menu.key}>
-          <a target="_blank" rel="noopener noreferrer" href="#">
+          <a target="_blank" rel="noopener noreferrer" href="javascript:void(0);">
             {menu.name}
           </a>
         </Menu.Item>
@@ -117,7 +118,7 @@ const Chat: FC = () => {
       <div className="nav-group">
         <ul className="nav-group-list">
           <li className="nav-group-list-item logo">
-            <a href="#">
+            <a href="javascript:void(0);">
               <img
                 src="http://touxiangkong.com/uploads/allimg/20203301301/2020/3/YNVjqi.jpg"
                 alt=""
@@ -132,7 +133,7 @@ const Chat: FC = () => {
               >
                 <Tooltip placement="right" title={menu.name}>
                   <a
-                    href="#"
+                    href="javascript:void(0);"
                     className={state.selectNavKey === menu.key ? 'active' : ''}
                     onClick={() => onNavClick(menu.key)}
                   >
@@ -145,7 +146,7 @@ const Chat: FC = () => {
             );
           })}
           <li className="nav-group-list-item logo">
-            <a href="#">
+            <a href="javascript:void(0);">
               <Dropdown overlay={userMenu} trigger={['click']} placement="topLeft">
                 <img src="https://api.sunweihu.com/api/sjtx/api.php" alt="" />
               </Dropdown>

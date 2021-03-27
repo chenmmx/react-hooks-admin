@@ -1,7 +1,7 @@
 import React from 'react';
 // import { Provider } from 'react-redux';
 import zhCN from 'antd/es/locale-provider/zh_CN';
-import { BrowserRouter, Redirect } from 'react-router-dom';
+import { HashRouter, Redirect } from 'react-router-dom';
 import { MyRouter } from './router';
 import { ConfigProvider, message, notification } from 'antd';
 // import { tokenExpressInTime } from '../src/utils/methods';
@@ -34,10 +34,10 @@ function App() {
   return (
     // <Provider store={store}>
     <ConfigProvider locale={zhCN}>
-      <BrowserRouter>
+      <HashRouter>
         <MyRouter />
         {isLogined ? null : <Redirect from={'*'} exact={true} to={'/login'} />}
-      </BrowserRouter>
+      </HashRouter>
     </ConfigProvider>
     // </Provider>
   );

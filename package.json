@@ -2,7 +2,7 @@
   "name": "hook-ts-demo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
+  "homepage": "https://chenmmx.github.io/react-hooks-admin",
   "dependencies": {
     "@better-scroll/core": "^2.2.1",
     "@better-scroll/mouse-wheel": "^2.2.1",
